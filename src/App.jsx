@@ -1,12 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { TaskContext } from './context/TaskContext';
 
 import NewTaskForm from './components/NewTaskForm';
 import KanbanColumn from './components/KanbanColumn';
 import TaskCard from './components/TaskCard';
-import { useTasks } from './hooks/useTasks';
+
 
 export default function App() {
-  const { tasks, loading, error, addTask, moveTask, deleteTask, previeStatus } = useTasks();
+  const { tasks, loading, error } = useContext(TaskContext);
 
   if (error) {
     return (
@@ -33,13 +34,13 @@ export default function App() {
   return (
     <div style={{ fontFamily: 'sans-serif', padding: '20px' }}>
       <h1>Mi Tablero Kanban</h1>
-      <NewTaskForm addTask={addTask} />
+      <NewTaskForm />
 
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         {/* 5. Pasamos la función deleteTask a las columnas */}
-        <KanbanColumn title="Por Hacer" tasks={todoTasks} moveTask={moveTask} previeStatus={previeStatus} deleteTask={deleteTask} />
-        <KanbanColumn title="En Progreso" tasks={inProgressTasks} moveTask={moveTask} previeStatus={previeStatus} deleteTask={deleteTask} />
-        <KanbanColumn title="Completado" tasks={doneTasks} moveTask={moveTask} previeStatus={previeStatus} deleteTask={deleteTask} />
+        <KanbanColumn title="Por Hacer" tasks={todoTasks} />
+        <KanbanColumn title="En Progreso" tasks={inProgressTasks}/>
+        <KanbanColumn title="Completado" tasks={doneTasks} />
       </div>
     </div>
   );

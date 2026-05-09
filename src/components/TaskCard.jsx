@@ -1,5 +1,9 @@
+import { useContext } from 'react';
+import { TaskContext } from '../context/TaskContext';
 
-function TaskCard({ task, moveTask, previeStatus, deleteTask }) {
+function TaskCard({ task}) {
+  const { moveTask, previeStatus, deleteTask } = useContext(TaskContext);
+
   const getNextStatus = (currentStatus) => {
     if (currentStatus === 'todo') return 'in-progress';
     if (currentStatus === 'in-progress') return 'done';
