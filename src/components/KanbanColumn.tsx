@@ -1,7 +1,13 @@
 // src/components/KanbanColumn.jsx
 import TaskCard from './TaskCard';
+import { Task } from '../types';
 
-export default function KanbanColumn({ title, tasks }) {
+interface KanbanColumnProps {
+  title: string;
+  tasks: Task[];
+}
+
+export default function KanbanColumn({ title, tasks }: KanbanColumnProps) {
   return (
     <div className="flex-1 min-w-[250px] bg-gray-50 rounded-xl p-4 border border-gray-200 shadow-sm">
       <h2 className="text-lg font-bold text-gray-700 mb-4 pb-2 border-b border-gray-200">

@@ -1,14 +1,15 @@
 // src/pages/Board.jsx
-import { useContext } from 'react';
-import { TaskContext } from '../context/TaskContext';
+
+import { useTaskContext } from '../context/TaskContext';
 import KanbanColumn from '../components/KanbanColumn';
 import NewTaskForm from '../components/NewTaskForm';
+import { Task } from '../types';
 
 function Board() {
-  const { tasks, isLoading, error } = useContext(TaskContext);
+  const { tasks, loading, error } = useTaskContext();
 
-  if (error) { return 
-    (<div className="p-8 text-red-500 text-center font-medium">
+  if (error) { 
+    return  (<div className="p-8 text-red-500 text-center font-medium">
       Error: {error}
       <button
       onClick={() => window.location.reload()}
@@ -16,14 +17,16 @@ function Board() {
       >
       Reintentar
       </button>
-    </div> )}
+    </div> 
+    );
+  }
 
 
-  if (isLoading) return <div className="p-8 text-gray-500 text-center text-lg animate-pulse">⏳ Cargando tu tablero...</div>;
+  if (loading) return <div className="p-8 text-gray-500 text-center text-lg animate-pulse">⏳ Cargando tu tablero...</div>;
 
-  const todoTasks = tasks.filter(t => t.status === 'todo');
-  const inProgressTasks = tasks.filter(t => t.status === 'in-progress');
-  const doneTasks = tasks.filter(t => t.status === 'done');
+  const todoTasks: Task[] = tasks.filter(t => t.status === 'todo');
+  const inProgressTasks: Task[] = tasks.filter(t => t.status === 'in-progress');
+  const doneTasks: Task[] = tasks.filter(t => t.status === 'done');
 
   return (
     <div className="max-w-6xl mx-auto p-6 font-sans text-gray-800">

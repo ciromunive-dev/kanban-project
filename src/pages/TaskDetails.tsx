@@ -1,14 +1,14 @@
 // src/pages/TaskDetails.jsx
-import { useContext } from 'react';
+
 import { useParams, Link } from 'react-router-dom';
-import { TaskContext } from '../context/TaskContext';
+import { useTaskContext } from '../context/TaskContext';
 
 export default function TaskDetails() {
   // 1. Extraemos el 'taskId' directamente de la URL (ej. localhost:5173/tarea/123)
-  const { taskId } = useParams();
+  const { taskId } = useParams<{ taskId: string }>(); // Indicamos que taskId es un string
   
   // 2. Traemos todas las tareas de nuestro contexto global
-  const { tasks } = useContext(TaskContext);
+  const { tasks } = useTaskContext();
 
   // 3. Buscamos la tarea específica. 
   // OJO: Los parámetros de la URL siempre son texto (strings), así que lo convertimos a Número

@@ -1,12 +1,14 @@
 // src/components/NewTaskForm.jsx
-import { useState, useContext } from 'react';
-import { TaskContext } from '../context/TaskContext';
+import { useState } from 'react';
+import { useTaskContext } from '../context/TaskContext';
+
 
 export default function NewTaskForm() {
-  const [title, setTitle] = useState('');
-  const { addTask } = useContext(TaskContext);
+  const [title, setTitle] = useState<string>('');
 
-  const handleSubmit = (e) => {
+  const { addTask } = useTaskContext();
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (title.trim() === '') return;
     addTask(title);
