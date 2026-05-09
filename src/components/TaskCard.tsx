@@ -1,17 +1,21 @@
-import { useContext } from 'react';
-import { TaskContext } from '../context/TaskContext';
+import { useTaskContext } from '../context/TaskContext';
 import { Link } from 'react-router-dom'; // Importamos Link
+import { Task, Status } from '../types';
 
-function TaskCard({ task}) {
-  const { moveTask, previeStatus, deleteTask } = useContext(TaskContext);
+interface TaskCardProps {
+  task: Task;
+}
 
-  const getNextStatus = (currentStatus) => {
+function TaskCard({ task }: TaskCardProps) {
+  const { moveTask, previeStatus, deleteTask } = useTaskContext();
+
+  const getNextStatus = (currentStatus: Status): Status | null => {
     if (currentStatus === 'todo') return 'in-progress';
     if (currentStatus === 'in-progress') return 'done';
     return null;
   };
 
-  const getPrevStatus = (currentStatus) => {
+  const getPrevStatus = (currentStatus: Status): Status | null => {
     if (currentStatus === 'done') return 'in-progress';
     if (currentStatus === 'in-progress') return 'todo';
     return null;
@@ -43,7 +47,7 @@ return (
         </button>
 
         {/* Opcional: Botón para retroceder la tarea (si no está en 'todo') */}
-        {task.status !== 'todo' && (
+        {prevStatus && (
           <button 
             onClick={() => previeStatus(task.id, prevStatus)}
             className="px-3 py-1 bg-gray-200 text-gray-700 text-sm rounded cursor-pointer hover:bg-gray-300 transition-colors"
