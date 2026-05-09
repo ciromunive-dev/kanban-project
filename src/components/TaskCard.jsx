@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { TaskContext } from '../context/TaskContext';
+import { Link } from 'react-router-dom'; // Importamos Link
 
 function TaskCard({ task}) {
   const { moveTask, previeStatus, deleteTask } = useContext(TaskContext);
@@ -49,6 +50,10 @@ function TaskCard({ task}) {
             Retroceder ⬅
           </button>
         )}
+        {/* 4. Enlace para ver detalles de la tarea */}
+<       Link to={`/tarea/${task.id}`}>
+          <button style={{ cursor: 'pointer' }}>Ver Detalles</button>
+        </Link>
       </div>
     </div>
   );
