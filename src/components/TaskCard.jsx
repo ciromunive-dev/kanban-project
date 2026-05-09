@@ -20,39 +20,43 @@ function TaskCard({ task}) {
   const nextStatus = getNextStatus(task.status);
   const prevStatus = getPrevStatus(task.status);
 
-  return (
-    <div style={{ border: '1px solid gray', margin: '8px', padding: '8px', borderRadius: '4px', backgroundColor: 'white' }}>
-      <p>{task.title}</p>
+return (
+    <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-4 mb-3 hover:shadow-md transition-shadow">
+      <p className="text-gray-800 font-medium">{task.title}</p>
       
-      <div style={{ display: 'flex', gap: '8px', marginTop: '8px' }}>
+      {/* Contenedor de botones */}
+      <div className="flex flex-wrap gap-2 mt-4">
         {nextStatus && (
           <button 
             onClick={() => moveTask(task.id, nextStatus)}
-            style={{ cursor: 'pointer', padding: '4px 8px' }}
+            className="px-3 py-1 bg-blue-100 text-blue-700 text-sm rounded cursor-pointer hover:bg-blue-200 transition-colors"
           >
             Avanzar ➔
           </button>
         )}
         
-        {/* 3. Nuevo botón para eliminar la tarea */}
         <button 
-          onClick={() => deleteTask(task.id)}
-          style={{ cursor: 'pointer', padding: '4px 8px', backgroundColor: '#ff4d4d', color: 'white', border: 'none', borderRadius: '4px' }}
+          onClick={() => deleteTask(task.id)} 
+          className="px-3 py-1 bg-red-500 text-white text-sm rounded cursor-pointer hover:bg-red-600 transition-colors"
         >
           Eliminar
         </button>
+
         {/* Opcional: Botón para retroceder la tarea (si no está en 'todo') */}
         {task.status !== 'todo' && (
           <button 
             onClick={() => previeStatus(task.id, prevStatus)}
-            style={{ cursor: 'pointer', padding: '4px 8px' }}
+            className="px-3 py-1 bg-gray-200 text-gray-700 text-sm rounded cursor-pointer hover:bg-gray-300 transition-colors"
           >
             Retroceder ⬅
           </button>
         )}
-        {/* 4. Enlace para ver detalles de la tarea */}
-<       Link to={`/tarea/${task.id}`}>
-          <button style={{ cursor: 'pointer' }}>Ver Detalles</button>
+        
+        <Link 
+          to={`/tarea/${task.id}`}
+          className="px-3 py-1 border border-gray-300 text-gray-600 text-sm rounded cursor-pointer hover:bg-gray-50 transition-colors text-center inline-block"
+        >
+          Ver Detalles
         </Link>
       </div>
     </div>
@@ -60,3 +64,4 @@ function TaskCard({ task}) {
 }
 
 export default TaskCard;
+

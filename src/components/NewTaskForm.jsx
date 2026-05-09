@@ -1,9 +1,9 @@
+// src/components/NewTaskForm.jsx
 import { useState, useContext } from 'react';
 import { TaskContext } from '../context/TaskContext';
 
-function NewTaskForm() {
+export default function NewTaskForm() {
   const [title, setTitle] = useState('');
-
   const { addTask } = useContext(TaskContext);
 
   const handleSubmit = (e) => {
@@ -14,19 +14,20 @@ function NewTaskForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ marginBottom: '20px', padding: '10px', backgroundColor: '#e9ecef', borderRadius: '4px' }}>
+    <form onSubmit={handleSubmit} className="mb-8 p-6 bg-white rounded-xl border border-gray-200 shadow-sm flex flex-col sm:flex-row gap-4">
       <input
         type="text"
-        placeholder="Escribe una nueva tarea..."
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        style={{ padding: '8px', marginRight: '10px', width: '250px' }}
+        placeholder="Escribe una nueva tarea..."
+        className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
       />
-      <button type="submit" style={{ padding: '8px', cursor: 'pointer' }}>
+      <button 
+        type="submit"
+        className="px-6 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 transition-all cursor-pointer"
+      >
         Agregar Tarea
       </button>
     </form>
   );
 }
-
-export default NewTaskForm;

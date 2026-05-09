@@ -1,43 +1,42 @@
+// src/pages/Board.jsx
 import { useContext } from 'react';
 import { TaskContext } from '../context/TaskContext';
-
-import NewTaskForm from '../components/NewTaskForm';
 import KanbanColumn from '../components/KanbanColumn';
+import NewTaskForm from '../components/NewTaskForm';
 
 function Board() {
-  const { tasks, loading, error } = useContext(TaskContext);
+  const { tasks, isLoading, error } = useContext(TaskContext);
 
-  if (error) {
-    return (
-      <div style={{ padding: '20px', color: 'red', textAlign: 'center' }}>
-        <h2>¡Ups! Algo salió mal.</h2>
-        <p>{error}</p>
-        <button onClick={() => window.location.reload()}>Reintentar</button>
-      </div>
-    );
-  }
+  if (error) { return 
+    (<div className="p-8 text-red-500 text-center font-medium">
+      Error: {error}
+      <button
+      onClick={() => window.location.reload()}
+      className="mt-4 px-4 py-2 bg-red-500 text-white text-sm font-medium rounded-md hover:bg-red-600 active:bg-red-700 transition-colors"
+      >
+      Reintentar
+      </button>
+    </div> )}
 
-  if (loading) {
-    return (
-      <div style={{ padding: '50px', textAlign: 'center', fontSize: '1.2rem' }}>
-        ⏳ Cargando tu tablero...
-      </div>
-    );
-  }
+
+  if (isLoading) return <div className="p-8 text-gray-500 text-center text-lg animate-pulse">⏳ Cargando tu tablero...</div>;
 
   const todoTasks = tasks.filter(t => t.status === 'todo');
   const inProgressTasks = tasks.filter(t => t.status === 'in-progress');
   const doneTasks = tasks.filter(t => t.status === 'done');
 
   return (
-    <div style={{ fontFamily: 'sans-serif', padding: '20px' }}>
-      <h1>Mi Tablero Kanban</h1>
+    <div className="max-w-6xl mx-auto p-6 font-sans text-gray-800">
+      <h1 className="text-3xl font-extrabold text-gray-900 mb-8 tracking-tight">
+        Mi Tablero Kanban
+      </h1>
+      
       <NewTaskForm />
 
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        {/* 5. Pasamos la función deleteTask a las columnas */}
+      {/* Usamos flex-col para móviles y flex-row para pantallas medianas (md) en adelante */}
+      <div className="flex flex-col md:flex-row gap-6 items-start">
         <KanbanColumn title="Por Hacer" tasks={todoTasks} />
-        <KanbanColumn title="En Progreso" tasks={inProgressTasks}/>
+        <KanbanColumn title="En Progreso" tasks={inProgressTasks} />
         <KanbanColumn title="Completado" tasks={doneTasks} />
       </div>
     </div>
