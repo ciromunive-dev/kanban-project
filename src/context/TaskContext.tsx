@@ -5,7 +5,7 @@ import { Task, Status } from '../types';
 interface TaskContextType {
   tasks: Task[];
   loading: boolean;
-  error: string | null;
+  error: Error | null;
   addTask: (title: string) => void;
   moveTask: (taskId: number, newStatus: Status) => void;
   deleteTask: (taskId: number) => void;
