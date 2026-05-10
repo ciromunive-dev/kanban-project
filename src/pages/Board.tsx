@@ -10,7 +10,7 @@ function Board() {
 
   if (error) { 
     return  (<div className="p-8 text-red-500 text-center font-medium">
-      Error: {error}
+      Error: {error?.message}
       <button
       onClick={() => window.location.reload()}
       className="mt-4 px-4 py-2 bg-red-500 text-white text-sm font-medium rounded-md hover:bg-red-600 active:bg-red-700 transition-colors"

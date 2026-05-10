@@ -24,17 +24,19 @@ export default function TaskDetails() {
   }
 
   return (
-    <div style={{ padding: '20px', fontFamily: 'sans-serif' }}>
+    <div className="max-w-2xl mx-auto p-6 font-sans text-gray-800">
       {/* Usamos <Link> de React Router en lugar de <a href=""> para evitar recargar la página */}
-      <Link to="/" style={{ textDecoration: 'none', color: 'blue' }}>
+      <Link to="/" className="text-blue-600 hover:text-blue-700 hover:underline font-medium transition-colors">
         ← Volver al Tablero
       </Link>
       
-      <div style={{ marginTop: '20px', padding: '20px', border: '1px solid gray', borderRadius: '8px' }}>
-        <h1>Detalles de la Tarea</h1>
-        <p><strong>ID:</strong> {task.id}</p>
-        <p><strong>Título:</strong> {task.title}</p>
-        <p><strong>Estado Actual:</strong> {task.status.toUpperCase()}</p>
+      <div className="mt-6 bg-white border border-gray-200 rounded-2xl shadow-sm p-6">
+        <h1 className="text-3xl font-bold text-gray-900 mb-6">
+          Detalles de la Tarea
+        </h1>
+        <p className="mb-3"><strong>ID:</strong> {task.id}</p>
+        <p className="mb-3"><strong>Título:</strong> {task.title}</p>
+        <p className="mb-3"><strong>Estado Actual:</strong> {task.status.toUpperCase()}</p>
         <p><em>Aquí podrías agregar más adelante una descripción larga, comentarios, fechas, etc.</em></p>
       </div>
     </div>
